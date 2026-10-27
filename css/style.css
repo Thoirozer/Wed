@@ -1,0 +1,168 @@
+:root{
+  --bg:#f6f7f4;--card:#fff;--ink:#1d2a4a;--mut:#56617c;--blue:#2447a8;--navy:#0f2a6b;--gold:#c9973f;--line:#d9dfec;
+  /* Corner flower size: bigger than before (was min(24vw,190px)). Change this ONE value to resize all flowers. */
+  --fs:clamp(120px,34vw,420px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0b1431;--card:#13204a;--ink:#eef1fa;--mut:#aab4d4;--blue:#8fb0ff;--navy:#c9d6ff;--gold:#e0b565;--line:#2a3a70}
+}
+:root[data-theme="dark"]{--bg:#0b1431;--card:#13204a;--ink:#eef1fa;--mut:#aab4d4;--blue:#8fb0ff;--navy:#c9d6ff;--gold:#e0b565;--line:#2a3a70}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:clamp(18px,1.1vw + 14px,22px)/1.6 'Cormorant Garamond',Georgia,serif;overflow-x:hidden;-webkit-text-size-adjust:100%}
+img{max-width:100%}
+.script{font-family:'Great Vibes','Brush Script MT',cursive;font-weight:400;color:var(--blue)}
+
+/* ---------- Corner flowers ---------- */
+.fl{position:absolute;pointer-events:none;width:var(--fs);height:auto;z-index:0}
+.tl{top:0;left:0}
+.tr{top:0;right:0;transform:scaleX(-1)}
+.bl{bottom:0;left:0}
+.br{bottom:0;right:0;transform:scaleX(-1)}
+
+/* Sections reserve room for their flowers, so text never overlaps them.
+   Pink rose corner reaches ~46% of --fs down; red rose corner reaches ~60% of --fs up. */
+section{
+  position:relative;overflow:hidden;text-align:center;
+  padding:56px calc(var(--fs)*.3);
+}
+section.has-top{padding-top:calc(var(--fs)*.46 + 24px)}
+section.has-bottom{padding-bottom:calc(var(--fs)*.6 + 24px)}
+section.alt{background:var(--card)}
+.in{position:relative;z-index:1;max-width:760px;margin:auto}
+
+h2{font-size:clamp(44px,9vw,64px);margin:0 0 6px;line-height:1.1}
+.sub{color:var(--mut);font-style:italic;margin:0 0 30px}
+.orn{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--gold);margin:18px auto;max-width:320px}
+.orn:before,.orn:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn:after{transform:scaleX(-1)}
+
+nav{position:sticky;top:0;z-index:20;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav a{color:var(--navy);text-decoration:none;padding:4px 12px;border-radius:99px;font-size:18px}
+nav a:hover,nav a:focus-visible{background:var(--line);outline:none}
+
+/* ---------- Hero ---------- */
+.hero{min-height:92vh;min-height:calc(100svh - 28px);display:grid;place-items:center;border:10px double var(--navy);margin:14px;border-radius:4px;background:var(--card)}
+.tag{font-style:italic;font-size:17px;color:var(--mut);line-height:1.3;margin:0 0 22px}
+.together{letter-spacing:.12em;margin:0;color:var(--navy);font-weight:600}
+.invite{margin:4px 0 0}
+.names{font-size:clamp(44px,10.5vw,86px);line-height:1.05;margin:10px 0}
+.names small{display:block;font-size:.42em;color:var(--gold);margin:0}
+.date{font-size:26px;letter-spacing:.04em;color:var(--navy);font-weight:600}
+.date.time{font-size:20px;font-weight:400}
+.heart{color:#e8506e}
+.cd{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.cd div{min-width:74px;padding:10px 6px;border:1px solid var(--gold);border-radius:50% 50% 8px 8px/38% 38% 8px 8px;background:var(--card)}
+.cd b{display:block;font-size:34px;color:var(--navy);line-height:1.1}
+.cd span{font-size:15px;color:var(--mut)}
+.btn{display:inline-block;margin-top:26px;padding:10px 26px;border:1px solid var(--navy);color:var(--navy);border-radius:99px;text-decoration:none;font-weight:600;background:transparent}
+.btn:hover,.btn:focus-visible{background:var(--navy);color:var(--bg);outline:none}
+
+/* ---------- Couple ---------- */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px;margin-top:20px}
+.pc img{width:100%;max-width:340px;aspect-ratio:1;object-fit:cover;object-position:center 22%;border-radius:50%;border:6px solid var(--card);box-shadow:0 0 0 2px var(--gold)}
+.pc h3{font-size:42px;margin:14px 0 0}
+.pc p{margin:4px 0;color:var(--mut)}
+.arch{max-width:360px;margin:0 auto}
+.arch img{width:100%;border-radius:999px 999px 10px 10px;border:2px solid var(--gold);padding:8px;background:var(--card);display:block}
+.msg{max-width:540px;margin:26px auto 0}
+
+/* ---------- Details ---------- */
+.ev{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;margin-top:10px}
+.ev div{padding:12px 16px}
+.ev div+div{border-left:1px solid var(--gold)}
+.ev i{font-style:normal;font-size:34px;display:block}
+.ev b{display:block;color:var(--navy);font-size:22px}
+@media(max-width:600px){.ev div+div{border-left:0;border-top:1px solid var(--gold)}}
+
+/* ---------- Venue ---------- */
+.qr{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;margin-top:30px;justify-items:center}
+.qr figure{margin:0;max-width:260px}
+.qr img{width:100%;background:#fff;border-radius:18px}
+.qr figcaption{font-style:italic;color:var(--mut);font-size:17px}
+
+footer{padding:60px 22px 70px;text-align:center;border-top:1px solid var(--line);color:var(--mut)}
+footer .script{font-size:44px;display:block}
+
+@media(prefers-reduced-motion:no-preference){
+  .hero .in{animation:rise 1.4s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}}
+}
+
+/* ---------- Shining gold names ---------- */
+.gold,.script.gold{
+  color:#c9973f; /* fallback if background-clip:text is unsupported */
+  background-image:linear-gradient(105deg,
+    #8a5a06 0%,#b8800f 14%,#e0ac26 26%,#f7d64e 34%,#d9a31c 44%,
+    #9c6a08 56%,#cf9a1e 68%,#f5d044 76%,#c18d12 86%,#8a5a06 100%);
+  background-size:250% 100%;
+  background-position:0% 50%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(70,42,0,.45));
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  padding:.04em .08em; /* stops the script flourishes being clipped */
+}
+.names .nm{display:block}
+@media(prefers-reduced-motion:no-preference){
+  .gold{animation:shine 5s linear infinite}
+  @keyframes shine{to{background-position:-250% 50%}}
+}
+
+/* ---------- Phones (up to 600px) ---------- */
+@media(max-width:600px){
+  section{padding:44px 20px}
+  section.has-top{padding-top:calc(var(--fs)*.46 + 16px)}
+  section.has-bottom{padding-bottom:calc(var(--fs)*.6 + 16px)}
+  .hero{border-width:6px;margin:8px}
+  nav{gap:0;padding-left:6px;padding-right:6px}
+  nav a{padding:4px 9px;font-size:16px}
+  .names{font-size:clamp(40px,12.5vw,60px)}
+  .date{font-size:22px}
+  .cd{gap:8px}
+  .cd div{min-width:64px;flex:1 1 64px;max-width:84px}
+  .cd b{font-size:28px}
+  .pair{gap:28px}
+  .pc h3{font-size:clamp(34px,10vw,42px)}
+  .btn{padding:10px 22px}
+}
+
+/* ---------- Tablets (601px - 1023px) ---------- */
+@media(min-width:601px) and (max-width:1023px){
+  section{padding-left:calc(var(--fs)*.3);padding-right:calc(var(--fs)*.3)}
+  .pair{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------- Desktop (1024px and up) ---------- */
+@media(min-width:1024px){
+  .in{max-width:1040px}
+  section{padding-top:84px;padding-bottom:84px}
+  section.has-top{padding-top:calc(var(--fs)*.46 + 40px)}
+  section.has-bottom{padding-bottom:calc(var(--fs)*.6 + 40px)}
+  nav a{font-size:20px;padding:5px 18px}
+  .hero{margin:20px auto;max-width:1280px;min-height:calc(100svh - 40px);border-width:12px}
+  .names{font-size:clamp(70px,6.4vw,104px)}
+  .names small{margin:6px 0}
+  .tag{font-size:20px}
+  .date{font-size:30px}
+  .cd div{min-width:92px}
+  .cd b{font-size:40px}
+  h2{font-size:clamp(60px,5vw,76px)}
+  .pair{grid-template-columns:repeat(2,1fr);gap:64px}
+  .pc img{max-width:360px}
+  .pc h3{font-size:46px}
+  .arch{max-width:420px}
+  .ev{max-width:900px;margin-left:auto;margin-right:auto}
+  .qr{max-width:700px;margin-left:auto;margin-right:auto;gap:60px}
+}
+
+/* Very large screens */
+@media(min-width:1600px){
+  body{font-size:24px}
+  .hero{max-width:1440px}
+}
+
+/* ---------- Map links under QR codes ---------- */
+.maplink{display:inline-block;margin-top:10px;padding:8px 20px;border:1px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:600;font-size:18px;overflow-wrap:anywhere}
+.maplink:hover,.maplink:focus-visible{background:var(--navy);color:var(--bg);outline:none}
